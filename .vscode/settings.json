@@ -1,0 +1,9 @@
+{
+    "files.associations": {
+        "pressureChange.C": "cpp"
+    },
+    "[python]":{
+        "editor.insertSpaces": true,
+        "editor.tabSize": 4  
+    }
+}
