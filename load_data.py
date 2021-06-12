@@ -17,7 +17,7 @@ class MammoDataset(Dataset):
         if self.transform:
             image = self.transform(image)
             label = self.transform(label)
-        return image, label
+        return {'image' : image, 'label': label}
     
     def __len__(self):
         return len(self.image_path_list)
