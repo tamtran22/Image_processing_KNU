@@ -1,5 +1,6 @@
 from glob import glob
 from numpy.core.fromnumeric import shape
+import torch
 from torch.utils.data.dataloader import DataLoader
 from torch.utils.data.dataset import Dataset
 from torchvision.io import read_image
@@ -17,7 +18,8 @@ class MammoDataset(Dataset):
         if self.transform:
             image = self.transform(image)
             label = self.transform(label)
-        return {'image' : image, 'label': label}
+        # return {'image' : image, 'label': label}
+        return image, label
     
     def __len__(self):
         return len(self.image_path_list)
@@ -27,8 +29,10 @@ def read_data_by_index(self, index):
     label_path = self.label_path_list[index]
     image = read_image(image_path)
     label = read_image(label_path)
-    image = np.transpose(image, axes=(1,2,0))
-    label = np.transpose(label, axes=(1,2,0))
+    print(image.shape, label.shape)
+    image = torch.transpose(image, 1,2,0)
+    label = torch.transpose(label, 1,2,0)
+    print(image.shape, label.shape)
     return image, label
 
 if __name__ == '__main__':
